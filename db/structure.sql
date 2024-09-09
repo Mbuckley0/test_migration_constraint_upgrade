@@ -14,6 +14,19 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: admin_users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admin_users (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name character varying,
+    email character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -35,16 +48,11 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: admin_users admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-CREATE TABLE public.users (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    name character varying,
-    email character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
+ALTER TABLE ONLY public.admin_users
+    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -64,20 +72,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20240909045033');
+('20240909045033'),
+('20240909045532');
 
 
